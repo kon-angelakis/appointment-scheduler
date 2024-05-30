@@ -100,7 +100,12 @@ body {
     transition: background 0.3s ease;
 }
 
-.register-btn:hover {
+.register-btn.disabled {
+    background: #9e9e9e;
+    cursor: not-allowed;
+}
+
+.register-btn:hover:not(.disabled) {
     background: #388e3c;
 }
 
@@ -136,4 +141,33 @@ body {
 
 .input-box select:focus {
     border-bottom: 1px solid #64b5f6;
+}
+
+.error-icon {
+    display: none;
+    color: #fa2e00;
+    font-size: 16px;
+    position: absolute;
+    right: 0;
+    top: 37%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.error-tooltip {
+    display: none;
+    background-color: #fa2e00;
+    color: #fff;
+    font-size: 12px;
+    padding: 5px;
+    border-radius: 5px;
+    position: absolute;
+    left: 104%;
+    top: -5px;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+.error-icon:hover + .error-tooltip {
+    display: block;
 }

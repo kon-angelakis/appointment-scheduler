@@ -79,6 +79,27 @@ body {
     font-size: 12px;
 }
 
+.password-box {
+    display: flex;
+    align-items: center;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 40%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+    color: #bbb;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.toggle-password:hover {
+    color: #64b5f6;
+    transform: translateY(-50%) scale(1.2);
+}
+
 .login-btn {
     width: 100%;
     background: #4caf50;

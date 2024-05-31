@@ -26,7 +26,6 @@
 <div class="login-container">
     <div class="login-box">
         <h1>Error</h1>
-        <h3>Username already registered</h3>
         <h4 id="countdown">Redirecting in: </h4>
     </div>
 </div>

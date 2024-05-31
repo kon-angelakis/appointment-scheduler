@@ -13,6 +13,7 @@ public class Student extends User{
     private List<Appointment> appointments = new ArrayList<>();
     private int year;
     private int semester;
+    private jdbc_connector c;
 
     public Student() {
         super();
@@ -34,7 +35,7 @@ public class Student extends User{
 
     public boolean Register(String fname, String lname, String email, String am, String password, String usertype){
         super.Register(fname, lname, email, am, password, usertype);
-        jdbc_connector c = new jdbc_connector();
+        c = new jdbc_connector();
 
         //Determine student year based on provided AM
         String firstTwoDigits = am.substring(1, 3);
@@ -57,27 +58,30 @@ public class Student extends User{
 
     @Override
     public User Login(String AM, String password) throws SQLException {
-        jdbc_connector connection = new jdbc_connector();
-        PreparedStatement statement = connection.getConnection().prepareStatement("SELECT users.*, students.year  FROM users, students WHERE users.username ILIKE ? AND users.password = ?");
-        statement.setString(1, AM);
-        statement.setString(2, password);
-        ResultSet results = statement.executeQuery();
-        try {
+        c = new jdbc_connector();
+        try (Connection conn = c.getConnection();
+             PreparedStatement statement = conn.prepareStatement("SELECT users.*, students.year  FROM users JOIN students ON users.username = students.username WHERE users.username ILIKE ? AND users.password = ?")) {
 
-            while(results.next()){
-                this.firstName = results.getString("firstname");
-                this.lastName = results.getString("lastname");
-                this.email = results.getString("email");
-                this.username = results.getString("username");
-                this.password = results.getString("password");
-                this.year = results.getInt("year");
+            statement.setString(1, AM);
+            statement.setString(2, password);
+
+            try (ResultSet results = statement.executeQuery()) {
+                if (results.next()) {
+                    this.firstName = results.getString("firstname");
+                    this.lastName = results.getString("lastname");
+                    this.email = results.getString("email");
+                    this.username = results.getString("username");
+                    this.password = results.getString("password");
+                    this.year = results.getInt("year");
+                    return this;
+                }
 
             }
-            return this;
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;
         }
+        return null;
+
     }
 
     @Override

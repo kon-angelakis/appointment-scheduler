@@ -15,7 +15,7 @@
 </head>
 <body>
 <div class="container">
-    <h1>Welcome, <a href="#"><%= user.getFirstName() + " " + user.getLastName() %></a></h1>
+    <h1>Welcome, <%= user.getFirstName() + " " + user.getLastName() %></h1>
     <div class="card-container">
         <div class="card">
             <i class="fas fa-calendar-alt icon"></i>

@@ -11,6 +11,7 @@ public class Professor extends User{
     private List<Schedule> calendar = new ArrayList<>();
     private List<Appointment> appointments = new ArrayList<>();
     private String department;
+    private jdbc_connector c;
 
     public Professor() {
         super();
@@ -30,7 +31,7 @@ public class Professor extends User{
 
     public boolean Register(String fname, String lname, String email, String username, String password, String department, String usertype){
         super.Register(fname, lname, email, username, password, usertype);
-        jdbc_connector c = new jdbc_connector();
+        c = new jdbc_connector();
         try (Connection con = c.getConnection();
              PreparedStatement stmt = con.prepareStatement("INSERT INTO professors VALUES(?, ?)")) {
             stmt.setString(1, username);
@@ -46,27 +47,30 @@ public class Professor extends User{
 
     @Override
     public User Login(String username, String password) throws SQLException {
-        jdbc_connector connection = new jdbc_connector();
-        PreparedStatement statement = connection.getConnection().prepareStatement("SELECT users.*, professors.department  FROM users, professors WHERE users.username = ? AND users.password = ?");
-        statement.setString(1, username);
-        statement.setString(2, password);
-        ResultSet results = statement.executeQuery();
-        try {
+        c = new jdbc_connector();
+        try (Connection conn = c.getConnection();
+             PreparedStatement statement = conn.prepareStatement("SELECT users.*, professors.department  FROM users JOIN professors ON users.username = professors.username WHERE users.username ILIKE ? AND users.password = ?")) {
 
-            while(results.next()){
-                this.firstName = results.getString("firstname");
-                this.lastName = results.getString("lastname");
-                this.email = results.getString("email");
-                this.username = results.getString("username");
-                this.password = results.getString("password");
-                this.department = results.getString("department");
+            statement.setString(1, username);
+            statement.setString(2, password);
+
+            try (ResultSet results = statement.executeQuery()) {
+                if (results.next()) {
+                    this.firstName = results.getString("firstname");
+                    this.lastName = results.getString("lastname");
+                    this.email = results.getString("email");
+                    this.username = results.getString("username");
+                    this.password = results.getString("password");
+                    this.department = results.getString("department");
+                    return this;
+                }
 
             }
-            return this;
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;
         }
+        return null;
+
     }
 
     @Override

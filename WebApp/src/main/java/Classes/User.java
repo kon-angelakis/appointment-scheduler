@@ -10,6 +10,7 @@ public abstract class User {
     protected String email;
     protected String username;
     protected String password;
+    private jdbc_connector c;
 
     public User() {
 
@@ -17,7 +18,7 @@ public abstract class User {
 
     //If there were errors return false and redirect accordingly
     public boolean Register(String fname, String lname, String email, String username, String password, String usertype){
-        jdbc_connector c = new jdbc_connector();
+        c = new jdbc_connector();
         try (Connection con = c.getConnection();
              PreparedStatement stmt = con.prepareStatement("INSERT INTO users VALUES(?, ?, ?, ?, ?, ?)")) {
             stmt.setString(1, fname);
@@ -58,4 +59,5 @@ public abstract class User {
     public String getPassword() {
         return password;
     }
+
 }

@@ -26,7 +26,7 @@
                 <span class="error-tooltip" id="tooltip-lastName">Invalid last name</span>
             </div>
             <div class="input-box">
-                <input type="email" id="email" name="email" required>
+                <input type="text" id="email" name="email" required>
                 <label>Email</label>
                 <span class="error-icon" id="error-email"><i class="fas fa-exclamation-circle"></i></span>
                 <span class="error-tooltip" id="tooltip-email">Invalid email address</span>
@@ -72,7 +72,7 @@
         isValid &= validateField('firstName', /^[A-Za-z\s-]+$/, 'Invalid first name');
         isValid &= validateField('lastName', /^[A-Za-z\s-]+$/, 'Invalid last name');
         isValid &= validateField('email', /^[^\s@]+@[^\s@]+\.[^\s@]+$/, 'Invalid email address');
-        isValid &= validateField('username', /^[A-Za-z]+$/, 'Invalid username');
+        isValid &= validateField('username', /^[a-z0-9._]+$/, 'Invalid username');
         isValid &= validateField('password', /^(?=.*[A-Z])(?=.*[0-9!@#$%^&*(),.?":{}|<>]).{8,}$/, 'Invalid password');
         isValid &= document.getElementById('department').value !== '';
         toggleSubmitButton(isValid);

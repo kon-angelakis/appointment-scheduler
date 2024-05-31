@@ -34,7 +34,7 @@
                 <span class="error-tooltip" id="tooltip-lastName">Invalid last name</span>
             </div>
             <div class="input-box">
-                <input type="email" name="email" id="email" required>
+                <input type="text" name="email" id="email" required>
                 <label>Email</label>
                 <span class="error-icon" id="error-email"><i class="fas fa-exclamation-circle"></i></span>
                 <span class="error-tooltip" id="tooltip-email">Invalid email address</span>

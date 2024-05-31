@@ -54,8 +54,13 @@ public class Login extends HttpServlet {
 
         //Keep the user object in the session when switching pages
         session.setAttribute("user", user);
+
         //After successful login redirect to home servlet for dynamic page handling based on usertype
-        response.sendRedirect("/Home");
+        if(user != null)
+            response.sendRedirect("/Home");
+        else
+            response.sendRedirect("/Login");
+
     }
 
     public void destroy() {

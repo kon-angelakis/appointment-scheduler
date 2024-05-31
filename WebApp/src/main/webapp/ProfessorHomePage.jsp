@@ -20,7 +20,7 @@
         <div class="card">
             <i class="fas fa-calendar-alt icon"></i>
             <h2>Edit availability</h2>
-            <p>View your availability</p>
+            <p>View your schedule</p>
         </div>
         <div class="card">
             <i class="fas fa-tasks icon"></i>

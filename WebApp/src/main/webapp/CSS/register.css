@@ -152,6 +152,7 @@ body {
     top: 37%;
     transform: translateY(-50%);
     cursor: pointer;
+    animation: fadeIn 0.3s forwards;
 }
 
 .error-tooltip {
@@ -166,6 +167,7 @@ body {
     top: -5px;
     white-space: nowrap;
     z-index: 10;
+    animation: fadeIn 0.8s forwards;
 }
 
 .error-icon:hover + .error-tooltip {

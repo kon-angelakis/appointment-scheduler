@@ -1,0 +1,21 @@
+INSERT INTO public.users (firstname, lastname, email, username, password, type) VALUES
+('Ioannis', 'Tasoulas', 'jtas@unipi.gr', 'jtas', 'jtas', 'Professor'),
+('Maria', 'Virvou', 'mvirvou@unipi.gr', 'mvirvou', 'mvirvou', 'Professor'),
+('Filotheos', 'Ntalianis', 'filotheos@unipi.gr', 'fntalianis', 'filotheos', 'Professor'),
+('Konstantinos', 'Angelakis', 'p21001@unipi.gr', 'P21001', 'kangel', 'Student'),
+('Thrasyvoulos', 'Eirinaios - Marakas', 'p21094@unipi.gr', 'P21094', 'marakes', 'Student'),
+('Konstantinos', 'Panousis', 'p21124@unipi.gr', 'P21124', 'panoukla', 'Student'),
+('Nikodimos', 'Skaroulis', 'p21150@unipi.gr', 'P21150', 'sakroulis', 'Student');
+
+
+INSERT INTO public.professors (username, department) VALUES
+('jtas', 'Comp. Science'),
+('mvirvou', 'Comp. Science'),
+('fntalianis', 'Economics');
+
+
+INSERT INTO public.students (username, year) VALUES
+('P21001', 3),
+('P21094', 3),
+('P21124', 3),
+('P21150', 3);

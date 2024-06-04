@@ -1,5 +1,5 @@
 CREATE TABLE public.appointments (
-    app_id integer NOT NULL,
+    app_id SERIAL NOT NULL,
     student_name character varying(15),
     professor_name character varying(15),
     sch_date timestamp without time zone,
@@ -13,7 +13,7 @@ CREATE TABLE public.professors (
 );
 
 CREATE TABLE public.schedule (
-    schedule_id integer NOT NULL,
+    schedule_id SERIAL NOT NULL,
     professor_username character varying(10),
     date timestamp without time zone,
     available boolean

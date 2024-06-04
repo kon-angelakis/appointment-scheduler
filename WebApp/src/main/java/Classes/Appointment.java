@@ -8,7 +8,8 @@ public class Appointment {
     private int priority;
     private boolean status;
     private Date date;
-    private String category;
+    private String student_username;
+    private String professor_username;
 
     public void Cancel(){}
 }

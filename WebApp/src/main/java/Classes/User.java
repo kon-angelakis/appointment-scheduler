@@ -37,7 +37,7 @@ public abstract class User {
     }
 
     public abstract User Login(String username, String password) throws SQLException; //If user exists return him otherwise return null
-    public abstract void Logout();
+    public void Logout(){}
 
     // Getters
     public String getFirstName() {

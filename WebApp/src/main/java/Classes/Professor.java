@@ -73,8 +73,5 @@ public class Professor extends User{
 
     }
 
-    @Override
-    public void Logout() {
 
-    }
 }

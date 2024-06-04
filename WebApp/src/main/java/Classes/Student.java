@@ -27,7 +27,6 @@ public class Student extends User{
         return false;
     }
 
-    public void ChooseProfessor(){}
 
     public List<Appointment> ViewAppointments(){
         return appointments;
@@ -84,6 +83,5 @@ public class Student extends User{
 
     }
 
-    @Override
-    public void Logout(){}
+
 }

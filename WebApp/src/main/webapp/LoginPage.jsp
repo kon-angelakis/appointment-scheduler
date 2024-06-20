@@ -13,7 +13,7 @@
 <div class="login-container">
     <div class="login-box">
         <h2>Login</h2>
-        <form id="loginForm" action="Login" method="post" onsubmit="return validatePassword()">
+        <form id="loginForm" action="Login" method="post">
             <div class="input-box">
                 <input type="text" name="username" required>
                 <label>Username</label>

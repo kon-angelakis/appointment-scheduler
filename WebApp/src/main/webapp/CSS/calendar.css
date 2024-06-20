@@ -13,7 +13,11 @@ body {
 h1 {
     text-align: center;
     color: #e0e0e0;
-    margin-bottom: 20px;
+    margin: 0; /* Remove default margin */
+}
+
+.general-container{
+    min-width: 400px;
 }
 
 .calendar-container {
@@ -23,8 +27,6 @@ h1 {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     animation: fadeIn 1.3s ease-in-out;
     overflow: auto;
-    width: 80%;
-    max-width: 800px;
 }
 
 @keyframes fadeIn {
@@ -37,18 +39,20 @@ h1 {
 }
 
 .calendar-container table {
-    width: 100%;
-    height: 60%;
     border-collapse: collapse;
     text-align: center;
+
 }
 
 .calendar-container th,
 .calendar-container td {
     padding: 10px;
+    font-size: 20px;
     border: 2px solid #424242;
     text-align: center;
     vertical-align: middle;
+    width: 100px;
+    height: 50px;
 }
 
 .calendar-container th {
@@ -60,6 +64,7 @@ h1 {
     background: hsla(0, 0%, 24%, 1);
     color: #e0e0e0;
     transition: background 0.5s ease;
+    position: relative;
 }
 
 .calendar-container td.unavailable {
@@ -74,7 +79,45 @@ h1 {
     cursor: pointer;
 }
 
+.calendar-container td.today {
+    background-color: hsla(0, 0%, 36%, 1);
+    opacity: 0.5;
+}
+
+.calendar-container td.available.today:hover {
+    background: #8f8f8f;
+    color: #2e2e2e;
+    cursor: pointer;
+}
+
+.calendar-container td.available.today {
+    border-bottom-color: #abff87;
+}
+
 .calendar-container td.selected {
     background: #4caf50;
     color: #fff;
+}
+
+.event-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 7px); /* 2 columns */
+    grid-template-rows: repeat(2, 7px);    /* 2 rows */
+    gap: 3px; /* Adjust the gap between dots */
+    position: absolute;
+    bottom: 5px; /* Adjust as needed */
+    right: 5px; /* Adjust as needed */
+}
+.event-grid .dot {
+    width: 9px; /* Diameter of the circle */
+    height: 9px; /* Diameter of the circle */
+    background-color: red;
+    border-radius: 50%;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }

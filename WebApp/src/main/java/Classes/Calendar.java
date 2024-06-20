@@ -8,9 +8,10 @@ import java.util.List;
 public class Calendar {
 
     private int width, height;
-    private int year, month;
+    private int year, month, today = LocalDate.now().getDayOfMonth();
+    private int firstday;
     private YearMonth fulldate;
-    private LocalDate firstdate, lastdate, today = LocalDate.now();
+    private LocalDate firstdate, lastdate;
 
     private List<Integer> Unavailabledays = new ArrayList<>();
 
@@ -35,7 +36,7 @@ public class Calendar {
         int cols = 7;
         Integer[][] calendarArray = new Integer[rows][cols];
 
-        int firstday = firstdate.getDayOfWeek().getValue() % 7; //return index of first day
+        firstday = firstdate.getDayOfWeek().getValue() % 7; //return index of first day
         int totaldays = fulldate.lengthOfMonth();
         //Get other 2 months days to fill the empty calendar spots
         int prevmonth_days = YearMonth.of(firstdate.minusMonths(1).getYear(), firstdate.minusMonths(1).getMonthValue()).lengthOfMonth() - firstday + 1;
@@ -48,8 +49,7 @@ public class Calendar {
                 if (week == 0 && day < firstday){ //If first week and the first day not yet reached fill with previous months dates
                     calendarArray[week][day] = prevmonth_days++;
                     Unavailabledays.add(generalIndex);
-                }
-                else if (dayIndex <= totaldays){
+                }else if (dayIndex <= totaldays){
                     calendarArray[week][day] = dayIndex++;
                 }
                 else{ //After this month fills the rest of the cells with the next months
@@ -80,6 +80,12 @@ public class Calendar {
     }
     public List<Integer> getUnavailabledays(){
         return Unavailabledays;
+    }
+
+    //If calendars date(month and year) not synced with today's date then return 0 as today's day index
+    public int getToday(){
+        return this.month != YearMonth.of(LocalDate.now().getYear(), LocalDate.now().getMonth()).getMonthValue()
+                || this.year != YearMonth.of(LocalDate.now().getYear(), LocalDate.now().getMonth()).getYear() ? 0 : LocalDate.now().getDayOfMonth() + firstday;
     }
 }
 

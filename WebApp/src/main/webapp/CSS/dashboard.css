@@ -52,3 +52,7 @@ body {
     font-size: 14px;
     color: #ccc; /* Subdued text color for description */
 }
+
+a {
+    text-decoration: none;
+}

@@ -173,3 +173,19 @@ body {
 .error-icon:hover + .error-tooltip {
     display: block;
 }
+
+.toggle-password {
+    position: absolute;
+    left: -10%;
+    top: 40%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+    color: #bbb;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.toggle-password:hover {
+    color: #64b5f6;
+    transform: translateY(-50%) scale(1.2);
+}

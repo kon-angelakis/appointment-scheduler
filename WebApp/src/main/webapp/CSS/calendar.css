@@ -16,11 +16,11 @@ h1 {
     margin: 0; /* Remove default margin */
 }
 
-.general-container{
+.calendar-container{
     min-width: 400px;
 }
 
-.calendar-container {
+.table-container {
     background-color: #3a3a3a;
     padding: 20px;
     border-radius: 20px;
@@ -38,14 +38,14 @@ h1 {
     }
 }
 
-.calendar-container table {
+.table-container table {
     border-collapse: collapse;
     text-align: center;
 
 }
 
-.calendar-container th,
-.calendar-container td {
+.table-container th,
+.table-container td {
     padding: 10px;
     font-size: 20px;
     border: 2px solid #424242;
@@ -55,49 +55,40 @@ h1 {
     height: 50px;
 }
 
-.calendar-container th {
+.table-container th {
     background: #424242;
     color: #e0e0e0;
 }
 
-.calendar-container td {
+.table-container td {
     background: hsla(0, 0%, 24%, 1);
     color: #e0e0e0;
     transition: background 0.5s ease;
     position: relative;
 }
 
-.calendar-container td.unavailable {
+.table-container td.unavailable {
     background-color: hsla(0, 0%, 22%, 1);
     color: #fff;
     opacity: 0.3;
 }
 
-.calendar-container td.available:hover {
+.table-container td.available:hover {
     background: #8f8f8f;
     color: #2e2e2e;
     cursor: pointer;
 }
 
-.calendar-container td.today {
+.table-container td.today {
     background-color: hsla(0, 0%, 36%, 1);
-    opacity: 0.5;
+    opacity: 0.7;
 }
 
-.calendar-container td.available.today:hover {
-    background: #8f8f8f;
-    color: #2e2e2e;
-    cursor: pointer;
-}
 
-.calendar-container td.available.today {
+.table-container td.available.today {
     border-bottom-color: #abff87;
 }
 
-.calendar-container td.selected {
-    background: #4caf50;
-    color: #fff;
-}
 
 .event-grid {
     display: grid;
@@ -113,11 +104,24 @@ h1 {
     height: 9px; /* Diameter of the circle */
     background-color: red;
     border-radius: 50%;
+
 }
 
-.header-container {
+.table-header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
 }
+
+.table-header-container h1 {
+    flex-grow: 1;
+    text-align: center;
+    margin: 0;
+}
+
+.general-container {
+    display: flex;
+}
+
+

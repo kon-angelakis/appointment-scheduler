@@ -40,6 +40,7 @@
             <div class="input-box">
                 <input type="password" id="password" name="password" required>
                 <label>Password</label>
+                <span id="togglePassword" class="toggle-password"><i class="fas fa-eye-slash"></i></span>
                 <span class="error-icon" id="error-password"><i class="fas fa-exclamation-circle"></i></span>
                 <span class="error-tooltip" id="tooltip-password">Invalid password</span>
             </div>
@@ -59,51 +60,8 @@
         <p class="link-text">Have an account? <a href="Login">Go back to login</a></p>
     </div>
 </div>
-<script>
-    const fields = ['firstName', 'lastName', 'email', 'username', 'password', 'department'];
-    const submitButton = document.getElementById('submitButton');
-
-    fields.forEach(field => {
-        document.getElementById(field).addEventListener('input', validateForm);
-    });
-
-    function validateForm() {
-        let isValid = true;
-        isValid &= validateField('firstName', /^[A-Za-z\s-]+$/, 'Invalid first name');
-        isValid &= validateField('lastName', /^[A-Za-z\s-]+$/, 'Invalid last name');
-        isValid &= validateField('email', /^[^\s@]+@[^\s@]+\.[^\s@]+$/, 'Invalid email address');
-        isValid &= validateField('username', /^[a-z0-9._]+$/, 'Invalid username');
-        isValid &= validateField('password', /^(?=.*[A-Z])(?=.*[0-9!@#$%^&*(),.?":{}|<>]).{8,}$/, 'Invalid password');
-        isValid &= document.getElementById('department').value !== '';
-        toggleSubmitButton(isValid);
-    }
-
-    function validateField(fieldId, regex, errorMessage) {
-        const input = document.getElementById(fieldId);
-        const errorIcon = document.getElementById('error-' + fieldId);
-        const tooltip = document.getElementById('tooltip-' + fieldId);
-
-        const isValid = regex.test(input.value);
-        if (!isValid && input.value !== '') {
-            errorIcon.style.display = 'inline';
-            tooltip.innerText = errorMessage;
-        } else {
-            errorIcon.style.display = 'none';
-        }
-        return isValid;
-    }
-
-    function toggleSubmitButton(isValid) {
-        if (isValid) {
-            submitButton.disabled = false;
-            submitButton.classList.remove('disabled');
-        } else {
-            submitButton.disabled = true;
-            submitButton.classList.add('disabled');
-        }
-    }
-
-    document.addEventListener('DOMContentLoaded', validateForm);
-</script>
+<script src="JSScripts/TogglePassword.js"></script>
+<script src="JSScripts/ProfValidateForm.js"></script>
+<script src="JSScripts/RegFormValidateFields.js"></script>
 </body>
 </html>

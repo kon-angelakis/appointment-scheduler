@@ -64,7 +64,7 @@ public class Calendar {
     }
 
     public String getMonth(){
-        return fulldate.getMonth().toString();
+        return String.valueOf(fulldate.getMonth());
     }
     public String getYear(){
         return String.valueOf(fulldate.getYear());

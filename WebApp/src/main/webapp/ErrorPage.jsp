@@ -6,8 +6,8 @@
     <title>Entry Confirmed</title>
     <link rel="stylesheet" href="CSS/login.css">
 </head>
-<script src="JSScripts/Redirect.js.js"></script>
-<body onload="redirectToLogin()">
+<script src="JSScripts/Redirect.js"></script>
+<body onload="redirectToPrevious()">
 <div class="login-container">
     <div class="login-box">
         <h1>Error</h1>

@@ -1,4 +1,4 @@
-function redirectToLogin() {
+function redirectToPrevious() {
     let countdownElement = document.getElementById('countdown');
     let countdown = 3;
 
@@ -8,7 +8,9 @@ function redirectToLogin() {
             countdown--;
         } else {
             clearInterval(countdownInterval);
-            window.location.href = 'Login';
+            //TODO: If from Register forms return to login else go to homepage
+            //This redirects to the previous page
+            window.location.href = document.referrer;
         }
     }, 1000); //1 second
 }

@@ -17,6 +17,51 @@ public class Professor extends User{
         super();
     }
 
+    public boolean EditSchedule(Schedule schedule) {
+        //Handle an if where if schedule (prof.user and date) exist on db alter them else add new
+        c = new jdbc_connector();
+        int existing_record_id = -1;
+        //If the record exists update its status availability
+        try (Connection conn = c.getConnection();
+             PreparedStatement statement = conn.prepareStatement("SELECT schedule_id FROM schedule WHERE professor_username = ? AND date = ?")) {
+
+            statement.setString(1, this.username);
+            statement.setDate(2, schedule.getDate());
+
+            try (ResultSet results = statement.executeQuery()) {
+                if (results.next()) {
+                    existing_record_id = results.getInt("schedule_id");
+                    try (PreparedStatement stmtUpdate = conn.prepareStatement("UPDATE schedule SET available = ? WHERE schedule_id = ?")) {
+                        stmtUpdate.setBoolean(1, schedule.isBusy());
+                        stmtUpdate.setInt(2, existing_record_id);
+                        stmtUpdate.executeUpdate();
+                    }
+                }
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        c = new jdbc_connector();
+        //If record doesnt exist insert it
+        if(existing_record_id == -1) {
+            try (Connection con = c.getConnection();
+                 PreparedStatement stmt = con.prepareStatement("INSERT INTO schedule (professor_username, date, available) VALUES(?, ?, ?)")) {
+                stmt.setString(1, this.username);
+                stmt.setDate(2, schedule.getDate());
+                stmt.setBoolean(3, schedule.isBusy());
+                stmt.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+        c.closeConnection();
+        return true;
+    }
+
     public List<Schedule> getSchedule() {
         return calendar;
     }

@@ -1,14 +1,18 @@
 <%@ page import="Classes.Calendar" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.text.DecimalFormat" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 
 <%
+
+    DecimalFormat formatter = new DecimalFormat("00");
     Calendar calendar = (Calendar) session.getAttribute("calendar");
     Integer[][] calendarMatrix = calendar.CalculateCalendar();
     List<Integer> unavailable = calendar.getUnavailabledays();
     int todaysIndex = calendar.getToday();
+
 
 %>
 
@@ -50,7 +54,7 @@
             }, 1200);
         }
 
-        function changeDaySelection(day){
+        function changeDateSelection(day){
             const tds = document.querySelectorAll('.calendar-container table tbody td');
 
             //Change all but the selected tds class and so the color as well via css
@@ -59,9 +63,14 @@
             });
 
             event.target.classList.add('selected');
-            //set the hidden field to the day selected
-            document.getElementById("selectedDateInput").value = day + "/" + <%=calendar.getDate().getMonthValue()%> + "/" + <%=calendar.getDate().getYear()%>
-                console.log(document.getElementById("selectedDayInput").value)
+
+            //set the hidden field to the date selected in sql.date notation YYYY-MM-dd
+            document.getElementById("selectedDateInput").value = "<%= calendar.getDate().getYear() %>-" +
+                "<%= formatter.format(calendar.getDate().getMonthValue()) %>-" +
+                ("0" + day).slice(-2);  //Day as 2 digits
+
+
+            console.log(document.getElementById("selectedDateInput").value)
         }
     </script>
 
@@ -106,14 +115,14 @@
                             <% if (dayIndex == todaysIndex) { %>
 
                                 <td class="today available"
-                                    onclick="moveLeft(); changeDaySelection(<%=day%>);" >
+                                    onclick="moveLeft(); changeDateSelection(<%=day%>);" >
                                     <%= day %>
                                 </td>
 
                             <% } else { %>
 
                                 <td class="available"
-                                    onclick="moveLeft(); changeDaySelection(<%=day%>);" >
+                                    onclick="moveLeft(); changeDateSelection(<%=day%>);" >
                                     <%= day %>
                                     <div class="event-grid">
                                         <div class="dot"></div>
@@ -148,18 +157,22 @@
                 </tbody>
             </table>
         </div>
-        <div class="form-box form-section">
-            <h2>Change Availability for <input class="selectedDateInput" id="selectedDateInput"></h2>
-            <select>
-                <option>Select Availability</option>
-                <option>Available</option>
-                <option>Unavailable</option>
-            </select>
-        </div>
-        <div class="form-buttons">
-            <button class="btn-cancel" onclick="window.location.reload();">Cancel</button>
-            <button class="btn-submit" type="submit" formmethod="post">Submit</button>
-        </div>
+        <form id="availabilityForm" action="EditAvailability">
+            <div class="form-box form-section">
+                <h2>Change Availability for
+                    <input class="selectedDateInput" id="selectedDateInput" name="selectedDateInput">
+                </h2>
+                <select name="selectedAvailability">
+                    <option value="true">Available</option>
+                    <option value="false">Unavailable</option>
+                </select>
+            </div>
+            <div class="form-buttons">
+                <button class="btn-cancel" onclick="window.location.reload();">Cancel</button>
+                <button class="btn-submit" formmethod="POST" type="submit" >Submit</button>
+            </div>
+        </form>
+
     </div>
 
 </div>

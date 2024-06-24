@@ -1,10 +1,13 @@
 package Servlets;
 
 import java.io.*;
+import java.sql.Date;
 import java.time.LocalDate;
 
 import Classes.Calendar;
 import Classes.Professor;
+import Classes.Schedule;
+import Classes.User;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
@@ -26,6 +29,28 @@ public class EditAvailability extends HttpServlet {
 
             session.setAttribute("calendar", calendar);
             RequestDispatcher dispatcher = request.getRequestDispatcher("EditAvailabilityPage.jsp");
+            dispatcher.forward(request, response);
+
+        }else{
+            throw new ServletException("Access Denied");
+        }
+
+    }
+
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        response.setContentType("text/html");
+        HttpSession session = request.getSession();
+        RequestDispatcher dispatcher = null;
+        if(session.getAttribute("user") instanceof Professor) {
+            Professor user = (Professor) session.getAttribute("user");
+            Date date = Date.valueOf(request.getParameter("selectedDateInput"));
+            Boolean availability = Boolean.parseBoolean(request.getParameter("selectedAvailability"));
+
+            Schedule s = new Schedule(date, availability);
+            if(user.EditSchedule(s))
+                dispatcher = request.getRequestDispatcher("ConfirmationPage.jsp");
+            else
+                dispatcher = request.getRequestDispatcher("ErrorPage.jsp");
             dispatcher.forward(request, response);
 
         }else{

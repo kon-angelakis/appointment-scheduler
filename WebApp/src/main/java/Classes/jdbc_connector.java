@@ -5,9 +5,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class jdbc_connector {
-    private static final String DB_URL = "jdbc:postgresql://localhost:5432/UniAppointments";
+    private static final String DB_URL = "jdbc:postgresql://localhost:5432/Appointments";
     private static final String DB_USERNAME = "postgres";
-    private static final String DB_PASSWORD = "kwstas123";
+    private static final String DB_PASSWORD = "rafaelafo09";
 
     private Connection connection;
 

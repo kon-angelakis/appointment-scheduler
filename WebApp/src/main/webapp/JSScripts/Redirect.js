@@ -1,6 +1,6 @@
 function redirectToPrevious() {
     let countdownElement = document.getElementById('countdown');
-    let countdown = 3;
+    let countdown = 1;
 
     let countdownInterval = setInterval(function() {
         if (countdown > 0) {

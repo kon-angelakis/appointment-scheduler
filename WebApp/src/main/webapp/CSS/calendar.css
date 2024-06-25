@@ -102,9 +102,16 @@ h1 {
 .event-grid .dot {
     width: 9px; /* Diameter of the circle */
     height: 9px; /* Diameter of the circle */
-    background-color: red;
     border-radius: 50%;
 
+}
+
+.dot.available{
+    background-color: hsla(114, 79%, 50%, 0.88);
+}
+
+.dot.unavailable{
+    background-color: hsla(0, 77%, 43%, 0.84);
 }
 
 .table-header-container {

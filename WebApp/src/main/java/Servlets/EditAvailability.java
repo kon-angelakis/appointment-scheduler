@@ -20,7 +20,7 @@ public class EditAvailability extends HttpServlet {
         response.setContentType("text/html");
         HttpSession session = request.getSession();
         if(session.getAttribute("user") instanceof Professor) {
-
+            Professor user = (Professor) session.getAttribute("user");
             int year = request.getParameter("year") != null ? Integer.parseInt(request.getParameter("year")) : LocalDate.now().getYear();
             int month = request.getParameter("month") != null ? Integer.parseInt(request.getParameter("month")) : LocalDate.now().getMonthValue();
 
@@ -48,7 +48,7 @@ public class EditAvailability extends HttpServlet {
 
             Schedule s = new Schedule(date, availability);
             if(user.EditSchedule(s))
-                dispatcher = request.getRequestDispatcher("ConfirmationPage.jsp");
+                dispatcher = request.getRequestDispatcher("EditAvailabilityPage.jsp");
             else
                 dispatcher = request.getRequestDispatcher("ErrorPage.jsp");
             dispatcher.forward(request, response);

@@ -2,6 +2,7 @@ package Classes;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class Calendar {
     private YearMonth fulldate;
     private LocalDate firstdate, lastdate;
 
-    private List<Integer> Unavailabledays = new ArrayList<>();
+    private List<Date> Unavailabledates = new ArrayList<>();
 
     public Calendar(int year, int month) {
         this.year = year;
@@ -21,7 +22,6 @@ public class Calendar {
         fulldate = YearMonth.of(year, month);
         firstdate = fulldate.atDay(1);
         lastdate = fulldate.atEndOfMonth();
-
     }
 
     public void ChooseDimensions(int width, int height) {
@@ -29,67 +29,71 @@ public class Calendar {
         this.height = height;
     }
 
-
-
-    public Integer[][] CalculateCalendar() {
+    public Date[][] CalculateCalendar() {
         int rows = 6;
         int cols = 7;
-        Integer[][] calendarArray = new Integer[rows][cols];
+        Date[][] calendarArray = new Date[rows][cols];
 
-        firstday = firstdate.getDayOfWeek().getValue() % 7; //return index of first day
+        firstday = firstdate.getDayOfWeek().getValue() % 7; // return index of first day
         int totaldays = fulldate.lengthOfMonth();
-        //Get other 2 months days to fill the empty calendar spots
-        int prevmonth_days = YearMonth.of(firstdate.minusMonths(1).getYear(), firstdate.minusMonths(1).getMonthValue()).lengthOfMonth() - firstday + 1;
+
+        // Get other 2 months days to fill the empty calendar spots
+        YearMonth prevMonth = fulldate.minusMonths(1);
+        int prevmonth_days = prevMonth.lengthOfMonth() - firstday + 1;
+        YearMonth nextMonth = fulldate.plusMonths(1);
         int nextmonth_days = 1;
 
         int dayIndex = 1, generalIndex = 0;
         for (int week = 0; week < rows; week++) {
             for (int day = 0; day < cols; day++) {
 
-                if (week == 0 && day < firstday){ //If first week and the first day not yet reached fill with previous months dates
-                    calendarArray[week][day] = prevmonth_days++;
-                    Unavailabledays.add(generalIndex);
-                }else if (dayIndex <= totaldays){
-                    calendarArray[week][day] = dayIndex++;
-                }
-                else{ //After this month fills the rest of the cells with the next months
-                    calendarArray[week][day] = nextmonth_days++;
-                    Unavailabledays.add(generalIndex);
+                if (week == 0 && day < firstday) { // If first week and the first day not yet reached fill with previous months dates
+                    LocalDate date = LocalDate.of(prevMonth.getYear(), prevMonth.getMonth(), prevmonth_days++);
+                    calendarArray[week][day] = Date.valueOf(date);
+                    Unavailabledates.add(Date.valueOf(date));
+                } else if (dayIndex <= totaldays) {
+                    calendarArray[week][day] = Date.valueOf(LocalDate.of(year, month, dayIndex++));
+                } else { // After this month fills the rest of the cells with the next months
+                    LocalDate date = LocalDate.of(nextMonth.getYear(), nextMonth.getMonth(), nextmonth_days++);
+                    calendarArray[week][day] = Date.valueOf(date);
+                    Unavailabledates.add(Date.valueOf(date));
                 }
                 generalIndex++;
-
             }
         }
         return calendarArray;
     }
 
-    public String getMonth(){
+    public String getDay(Date date){
+        return String.valueOf(Date.valueOf(date.toString()).toLocalDate().getDayOfMonth());
+    }
+
+    public String getMonth() {
         return String.valueOf(fulldate.getMonth());
     }
-    public String getYear(){
+
+    public String getYear() {
         return String.valueOf(fulldate.getYear());
     }
+
     public int getHeight() {
         return height;
     }
+
     public int getWidth() {
         return width;
     }
-    public LocalDate getDate(){
+
+    public LocalDate getDate() {
         return firstdate;
     }
-    public List<Integer> getUnavailabledays(){
-        return Unavailabledays;
+
+    public List<Date> getUnavailabledates() {
+        return Unavailabledates;
     }
 
-    //If calendars date(month and year) not synced with today's date then return 0 as today's day index
-    public int getToday(){
-        return this.month != YearMonth.of(LocalDate.now().getYear(), LocalDate.now().getMonth()).getMonthValue()
-                || this.year != YearMonth.of(LocalDate.now().getYear(), LocalDate.now().getMonth()).getYear() ? 0 : LocalDate.now().getDayOfMonth() + firstday;
+    // If calendars date(month and year) not synced with today's date then return 0 as today's day index
+    public Date getToday() {
+        return Date.valueOf(LocalDate.now());
     }
 }
-
-
-
-
-

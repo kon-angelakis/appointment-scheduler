@@ -1,14 +1,11 @@
 package Classes;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Professor extends User{
-    private List<Schedule> calendar = new ArrayList<>();
+    private List<Schedule> schedule = new ArrayList<>();
     private List<Appointment> appointments = new ArrayList<>();
     private String department;
     private jdbc_connector c;
@@ -63,10 +60,39 @@ public class Professor extends User{
     }
 
     public List<Schedule> getSchedule() {
-        return calendar;
+        c = new jdbc_connector();
+        Connection conn = c.getConnection();
+        try{
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT date, available FROM schedule");
+            while(rs.next()) {
+                schedule.add(new Schedule(rs.getDate(1), rs.getBoolean(2)));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return schedule;
     }
 
     public List<Appointment> getAppointments() {
+        c = new jdbc_connector();
+        Connection conn = c.getConnection();
+        try{
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT student_name, professor_name, sch_date, reason, status FROM appointments");
+            while(rs.next()) {
+                appointments.add(new Appointment(rs.getString(1),
+                        rs.getString(2),
+                        rs.getDate(3),
+                        rs.getString(4),
+                        rs.getBoolean(5))
+                );
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         return appointments;
     }
 

@@ -2,17 +2,33 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.text.DecimalFormat" %>
+<%@ page import="Classes.Professor" %>
+<%@ page import="Classes.Schedule" %>
+<%@ page import="java.sql.Date" %>
+<%@ page import="Classes.Appointment" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 
 <%
-
+    //Used for date formating
     DecimalFormat formatter = new DecimalFormat("00");
     Calendar calendar = (Calendar) session.getAttribute("calendar");
-    Integer[][] calendarMatrix = calendar.CalculateCalendar();
-    List<Integer> unavailable = calendar.getUnavailabledays();
-    int todaysIndex = calendar.getToday();
-
+    Date[][] calendarMatrix = calendar.CalculateCalendar();
+    List<Date> unavailable = calendar.getUnavailabledates();
+    Date today = calendar.getToday();
+    Professor professor = (Professor) session.getAttribute("user");
+    List<Appointment> prof_appointments = professor.getAppointments();
+    List<Schedule> prof_schedule = professor.getSchedule();
+    //These 2 are used for availability dot placement in the calendar
+    List<Date> sch_dates = new ArrayList<>();
+    List<Boolean> sch_avail = new ArrayList<>();
+    for (int i = 0; i < prof_schedule.size(); i++) {
+        sch_dates.add(prof_schedule.get(i).getDate());
+        sch_avail.add(prof_schedule.get(i).isBusy());
+    }
+    //Clear for real-time event dot ui update
+    prof_schedule.clear();
+    prof_appointments.clear();
 
 %>
 
@@ -106,32 +122,51 @@
                 </tr>
                 </thead>
                 <tbody>
-                <% int dayIndex = 0; %>
-                <% for (Integer[] week : calendarMatrix) { %>
+                <% for (Date[] week : calendarMatrix) { %>
                 <tr>
 
-                    <% for (Integer day : week) { %>
-                        <% if (!unavailable.contains(dayIndex++)) { %>
-                            <% if (dayIndex == todaysIndex) { %>
+                    <% for (Date date : week) { %>
+                        <% if (!unavailable.contains(date)) { %>
+                            <% if (date.equals(today)) { %>
 
                                 <td class="today available"
-                                    onclick="moveLeft(); changeDateSelection(<%=day%>);" >
-                                    <%= day %>
+                                    onclick="moveLeft(); changeDateSelection(<%=calendar.getDay(date)%>);" >
+                                    <%= calendar.getDay(date) %>
+                                    <div class="event-grid">
+                                        <% if (sch_dates.contains(date) && sch_avail.get(sch_dates.indexOf(date))) { %>
+                                            <div class="dot available"></div>
+                                        <% } else if (sch_dates.contains(date) && !sch_avail.get(sch_dates.indexOf(date))) { %>
+                                            <div class="dot unavailable"></div>
+                                        <% } %>
+                                    </div>
                                 </td>
 
                             <% } else { %>
 
                                 <td class="available"
-                                    onclick="moveLeft(); changeDateSelection(<%=day%>);" >
-                                    <%= day %>
+                                    onclick="moveLeft(); changeDateSelection(<%=calendar.getDay(date)%>);" >
+                                    <%= calendar.getDay(date) %>
                                     <div class="event-grid">
-                                        <div class="dot"></div>
+                                        <% if (sch_dates.contains(date) && sch_avail.get(sch_dates.indexOf(date))) { %>
+                                            <div class="dot available"></div>
+                                        <% } else if (sch_dates.contains(date) && !sch_avail.get(sch_dates.indexOf(date))) { %>
+                                            <div class="dot unavailable"></div>
+                                        <% } %>
                                     </div>
                                 </td>
 
                             <% } %>
                         <% } else { %>
-                        <td class="unavailable"><%= day %></td>
+                        <td class="unavailable">
+                            <%= calendar.getDay(date) %>
+                            <div class="event-grid">
+                                <% if (sch_dates.contains(date) && sch_avail.get(sch_dates.indexOf(date))) { %>
+                                    <div class="dot available"></div>
+                                <% } else if (sch_dates.contains(date) && !sch_avail.get(sch_dates.indexOf(date))) { %>
+                                    <div class="dot unavailable"></div>
+                                <% } %>
+                            </div>
+                        </td>
                         <% } %>
                     <% } %>
                 </tr>
@@ -148,10 +183,15 @@
             <table>
                 <thead>
                 <tr>
-                    <th>Date</th>
                     <th>Student</th>
                     <th>About Appointment</th>
                 </tr>
+                <% for(Appointment appointment: prof_appointments) { %>
+                <tr>
+                    <td><%=appointment.getStudent_username()%></td>
+                    <td><%=appointment.getReason()%></td>
+                </tr>
+                <% } %>
                 </thead>
                 <tbody>
                 </tbody>

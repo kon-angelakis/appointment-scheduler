@@ -48,6 +48,13 @@
     color: #e0e0e0;
 }
 
+.form-section table td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100px;
+}
+
 .form-section select {
     width: 100%;
     padding: 10px;

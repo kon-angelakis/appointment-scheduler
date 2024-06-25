@@ -1,3 +1,4 @@
+/* Dark Mode Styles */
 body {
     margin: 0;
     padding: 0;
@@ -16,7 +17,7 @@ h1 {
     margin: 0; /* Remove default margin */
 }
 
-.calendar-container{
+.calendar-container {
     min-width: 400px;
 }
 
@@ -41,7 +42,6 @@ h1 {
 .table-container table {
     border-collapse: collapse;
     text-align: center;
-
 }
 
 .table-container th,
@@ -84,26 +84,24 @@ h1 {
     opacity: 0.7;
 }
 
-
 .table-container td.available.today {
     border-bottom-color: #abff87;
 }
 
-
 .event-grid {
     display: grid;
     grid-template-columns: repeat(2, 7px); /* 2 columns */
-    grid-template-rows: repeat(2, 7px);    /* 2 rows */
+    grid-template-rows: repeat(2, 7px); /* 2 rows */
     gap: 3px; /* Adjust the gap between dots */
     position: absolute;
     bottom: 5px; /* Adjust as needed */
     right: 5px; /* Adjust as needed */
 }
+
 .event-grid .dot {
     width: 9px; /* Diameter of the circle */
     height: 9px; /* Diameter of the circle */
     border-radius: 50%;
-
 }
 
 .dot.available{
@@ -131,4 +129,73 @@ h1 {
     display: flex;
 }
 
+/* Light Mode Styles */
+body.light-theme {
+    background-color: #f0f0f0; /* Lighter background color */
+    color: #333; /* Dark text color */
+}
 
+body.light-theme h1 {
+    color: #555; /* Darker text color for headings */
+}
+
+body.light-theme .table-container {
+    background-color: #f5f5f5; /* Lighter background for table container */
+}
+
+body.light-theme .table-container th {
+    background: #ccc; /* Light background for table header */
+    color: #333; /* Dark text color for table header */
+}
+
+body.light-theme .table-container td {
+    background: #ddd; /* Lighter background for table cells */
+    color: #333; /* Dark text color for table cells */
+}
+
+body.light-theme .table-container td.unavailable {
+    background-color: #bbb; /* Lighter background for unavailable cells */
+    color: #666; /* Darker text color for unavailable cells */
+}
+
+body.light-theme .table-container td.available:hover {
+    background: #bbb; /* Lighter background for hover state in light mode */
+    color: #333; /* Dark text color for hover state in light mode */
+}
+
+body.light-theme .table-container td.today {
+    background-color: #ccc; /* Lighter background for today's cell in light mode */
+    opacity: 0.7;
+}
+
+body.light-theme .event-grid .dot {
+    background-color: blue; /* Adjust dot color for light mode */
+}
+
+
+.floating-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #4caf50;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    padding: 10px 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease;
+}
+
+.floating-btn:hover {
+    background: #388e3c;
+}
+
+body.light-theme .floating-btn {
+    background: #64b5f6;
+}
+
+body.light-theme .floating-btn:hover {
+    background: #42a5f5;
+}

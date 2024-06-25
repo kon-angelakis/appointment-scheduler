@@ -130,3 +130,94 @@ body {
 .register-text a:hover {
     color: #42a5f5;
 }
+
+/* Light Theme Styles */
+body.light-theme {
+    background: #FAFAFA;
+    color: #333;
+}
+
+body.light-theme .login-container {
+    background-color: #D2D3DB;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .login-box {
+    background: #E4E5F1;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .login-box h2 {
+    color: #333;
+}
+
+body.light-theme .input-box input {
+    color: #333;
+    border-bottom: 1px solid #666;
+}
+
+body.light-theme .input-box label {
+    color: #666;
+}
+
+body.light-theme .input-box input:focus ~ label,
+body.light-theme .input-box input:valid ~ label {
+    color: #2196f3;
+}
+
+body.light-theme .toggle-password {
+    color: #666;
+}
+
+body.light-theme .toggle-password:hover {
+    color: #2196f3;
+}
+
+body.light-theme .login-btn {
+    background: #2196f3;
+    color: #fff;
+}
+
+body.light-theme .login-btn:hover {
+    background: #1d89de;
+}
+
+body.light-theme .register-text {
+    color: #666;
+}
+
+body.light-theme .register-text a {
+    color: #2196f3;
+}
+
+body.light-theme .register-text a:hover {
+    color: #1976d2;
+}
+
+/* Floating Button Styles */
+.floating-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #4caf50;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    padding: 10px 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease;
+}
+
+.floating-btn:hover {
+    background: #388e3c;
+}
+
+body.light-theme .floating-btn {
+    background: #64b5f6;
+}
+
+body.light-theme .floating-btn:hover {
+    background: #42a5f5;
+}

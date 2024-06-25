@@ -12,11 +12,11 @@
     <link rel="stylesheet" href="CSS/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
-<body>
+<body class="dark-theme">
 <div class="container">
     <h1>Welcome, <%= user.getFirstName() + " " + user.getLastName() %></h1>
     <div class="card-container">
-        <a href = "EditAvailability">
+        <a href="EditAvailability">
             <div class="card">
                 <i class="fas fa-calendar-alt icon"></i>
                 <h2>Edit availability</h2>
@@ -35,5 +35,9 @@
         </div>
     </div>
 </div>
+
+<button class="floating-btn" onclick="toggleTheme()">🌓</button>
+<script src="JSScripts/ToggleViewMode.js"></script>
+
 </body>
 </html>

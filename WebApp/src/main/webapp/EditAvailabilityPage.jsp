@@ -216,6 +216,7 @@
     </div>
 
 </div>
-
+<button class="floating-btn" onclick="toggleTheme()">🌓</button>
+<script src="JSScripts/ToggleViewMode.js"></script>
 </body>
 </html>

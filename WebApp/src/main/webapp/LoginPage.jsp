@@ -28,7 +28,7 @@
         <p class="register-text">Don't have an account? <a href="Student register">Register now</a></p>
     </div>
 </div>
-
+<button class="floating-btn" onclick="toggleTheme()">🌓</button>
 <script src="JSScripts/TogglePassword.js"></script>
 
 </body>

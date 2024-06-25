@@ -26,9 +26,6 @@
         sch_dates.add(prof_schedule.get(i).getDate());
         sch_avail.add(prof_schedule.get(i).isBusy());
     }
-    //Clear for real-time event dot ui update
-    prof_schedule.clear();
-    prof_appointments.clear();
 
 %>
 

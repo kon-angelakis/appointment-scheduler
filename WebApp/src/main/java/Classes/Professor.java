@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Professor extends User{
-    private List<Schedule> schedule = new ArrayList<>();
-    private List<Appointment> appointments = new ArrayList<>();
+    private List<Schedule> schedule;
+    private List<Appointment> appointments;
     private String department;
     private jdbc_connector c;
 
@@ -60,6 +60,7 @@ public class Professor extends User{
     }
 
     public List<Schedule> getSchedule() {
+        schedule = new ArrayList<>();
         c = new jdbc_connector();
         Connection conn = c.getConnection();
         try{
@@ -76,6 +77,8 @@ public class Professor extends User{
     }
 
     public List<Appointment> getAppointments() {
+        appointments = new ArrayList<>();
+
         c = new jdbc_connector();
         Connection conn = c.getConnection();
         try{

@@ -58,7 +58,7 @@
         <p class="link-text">Have an account? <a href="Login">Go back to login</a></p>
     </div>
 </div>
-<button class="floating-btn" onclick="toggleTheme()">🌓</button>
+<button class="floating-btn" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
 <script src="JSScripts/ToggleViewMode.js"></script>
 <script src="JSScripts/TogglePassword.js"></script>
 <script src="JSScripts/StudValidateForm.js"></script>

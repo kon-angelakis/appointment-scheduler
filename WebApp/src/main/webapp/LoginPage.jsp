@@ -28,7 +28,7 @@
         <p class="register-text">Don't have an account? <a href="Student register">Register now</a></p>
     </div>
 </div>
-<button class="floating-btn" onclick="toggleTheme()">🌓</button>
+<button class="floating-btn" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
 <script src="JSScripts/ToggleViewMode.js"></script>
 <script src="JSScripts/TogglePassword.js"></script>
 </body>

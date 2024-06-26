@@ -1,3 +1,16 @@
+/* Dark Mode Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: #2e2e2e;
+    color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
 .form-container {
     position: absolute;
     right: 10%;
@@ -9,17 +22,17 @@
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     transition: opacity 1.2s ease 1.0s;
-    opacity:0;
+    opacity: 0;
     display: none;
     text-align: center;
 }
+
 .form-box {
     flex-grow: 1;
     padding: 20px;
     background-color: #484848;
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
 }
 
 .form-section {
@@ -37,7 +50,8 @@
     border-collapse: collapse;
 }
 
-.form-section table th, .form-section table td {
+.form-section table th,
+.form-section table td {
     padding: 10px;
     border: 1px solid #424242;
     text-align: left;
@@ -88,7 +102,7 @@
 }
 
 .table-container td.selected {
-    background:  hsla(114, 77%, 81%, 0.62);
+    background: hsla(114, 77%, 81%, 0.62);
     color: #fff;
 }
 
@@ -109,4 +123,61 @@
 
 .selectedDateInput:focus {
     border-bottom: 1px solid #64b5f6;
+}
+
+/* Light Mode Styles */
+body.light-theme {
+    background-color: #f0f0f0; /* Lighter background color */
+    color: #333; /* Dark text color */
+}
+
+body.light-theme .form-container {
+    background-color: #D2D3DB; /* Lighter background for form container */
+}
+
+body.light-theme .form-box {
+    background-color: #E4E5F1; /* Lighter background for form box */
+}
+
+body.light-theme .form-section h2 {
+    color: #555; /* Darker text color for headings */
+}
+
+body.light-theme .form-section table th,
+body.light-theme .form-section table td {
+    border: 1px solid #D2D3DB; /* Light border color */
+}
+
+body.light-theme .form-section table th {
+    background: #E4E5F1; /* Light background for table header */
+    color: #333; /* Dark text color for table header */
+}
+
+body.light-theme .form-section select {
+    background: #E4E5F1; /* Light background for select */
+    color: #333; /* Dark text color for select */
+}
+
+body.light-theme .form-buttons .btn-cancel {
+    background: #ff4d4d; /* Same background color for cancel button */
+    color: #fff; /* Same text color for cancel button */
+}
+
+body.light-theme .form-buttons .btn-submit {
+    background: #2196f3; /* Same background color for submit button */
+    color: #fff; /* Same text color for submit button */
+}
+
+body.light-theme .table-container td.selected {
+    background: hsla(207, 77%, 81%, 0.62); /* Same background color for selected cell */
+    color: #333; /* Dark text color for selected cell */
+}
+
+body.light-theme .selectedDateInput {
+    color: #333; /* Dark text color for selected date input */
+    border-bottom: 1px solid #333; /* Darker border color */
+}
+
+body.light-theme .selectedDateInput:focus {
+    border-bottom: 1px solid #64b5f6; /* Same border color on focus */
 }

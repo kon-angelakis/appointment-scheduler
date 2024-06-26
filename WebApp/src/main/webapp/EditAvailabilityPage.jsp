@@ -213,7 +213,7 @@
     </div>
 
 </div>
-<button class="floating-btn" onclick="toggleTheme()">🌓</button>
+<button class="floating-btn" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
 <script src="JSScripts/ToggleViewMode.js"></script>
 </body>
 </html>

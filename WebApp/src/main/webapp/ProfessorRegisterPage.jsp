@@ -38,11 +38,18 @@
                 <span class="error-tooltip" id="tooltip-username">Invalid username</span>
             </div>
             <div class="input-box">
-                <input type="password" id="password" name="password" required>
+                <input type="password" name="password" id="password" required>
                 <label>Password</label>
                 <span id="togglePassword" class="toggle-password"><i class="fas fa-eye-slash"></i></span>
                 <span class="error-icon" id="error-password"><i class="fas fa-exclamation-circle"></i></span>
-                <span class="error-tooltip" id="tooltip-password">Invalid password</span>
+                <span class="error-tooltip" id="tooltip-password">
+                    Password must contain:
+                    <ul id="password-requirements">
+                        <li id="requirement-special">- One special character (!, @, $, %)</li>
+                        <li id="requirement-uppercase">- One uppercase letter (A, B, C, D etc)</li>
+                        <li id="requirement-length">- Be at least 8 characters long</li>
+                    </ul>
+                </span>
             </div>
             <div class="input-box">
                 <select id="department" name="department" required>

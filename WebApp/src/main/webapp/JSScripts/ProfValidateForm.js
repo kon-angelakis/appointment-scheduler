@@ -11,7 +11,7 @@ function validateForm() {
     isValid &= validateField('lastName', /^[A-Za-z\s-]+$/, 'Invalid last name');
     isValid &= validateField('email', /^[^\s@]+@[^\s@]+\.[^\s@]+$/, 'Invalid email address');
     isValid &= validateField('username', /^[a-z0-9._]+$/, 'Invalid username');
-    isValid &= validateField('password', /^(?=.*[A-Z])(?=.*[0-9!@#$%^&*(),.?":{}|<>]).{8,}$/, 'Invalid password');
+    isValid &= validatePassword();
     isValid &= document.getElementById('department').value !== '';
     toggleSubmitButton(isValid);
 }

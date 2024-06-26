@@ -50,7 +50,14 @@
                 <label>Password</label>
                 <span id="togglePassword" class="toggle-password"><i class="fas fa-eye-slash"></i></span>
                 <span class="error-icon" id="error-password"><i class="fas fa-exclamation-circle"></i></span>
-                <span class="error-tooltip" id="tooltip-password">Invalid password</span>
+                <span class="error-tooltip" id="tooltip-password">
+                    Password must contain:
+                    <ul id="password-requirements">
+                        <li id="requirement-special">- One special character (!, @, $, %)</li>
+                        <li id="requirement-uppercase">- One uppercase letter (A, B, C, D etc)</li>
+                        <li id="requirement-length">- Be at least 8 characters long</li>
+                    </ul>
+                </span>
             </div>
             <button type="submit" class="register-btn" id="submitButton" disabled>Register</button>
         </form>

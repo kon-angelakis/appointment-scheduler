@@ -11,6 +11,6 @@ function validateForm() {
     isValid &= validateField('lastName', /^[A-Za-z\s-]+$/, 'Invalid last name');
     isValid &= validateField('email', /^[^\s@]+@[^\s@]+\.[^\s@]+$/, 'Invalid email address');
     isValid &= validateField('am', /^[pP]\d{5}$/, 'Invalid username');
-    isValid &= validateField('password', /^(?=.*[A-Z])(?=.*[0-9!@#$%^&*(),.?":{}|<>]).{8,}$/, 'Invalid password');
+    isValid &= validatePassword();
     toggleSubmitButton(isValid);
 }

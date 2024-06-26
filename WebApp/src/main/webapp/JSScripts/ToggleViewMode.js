@@ -2,6 +2,7 @@
 document.addEventListener('DOMContentLoaded', (event) => {
     const body = document.body;
     const icon = document.querySelector('.floating-btn .fas');
+    //Session management for theme
     const theme = localStorage.getItem('theme');
 
     if (theme === 'light') {

@@ -99,19 +99,32 @@ public class Professor extends User{
 
         c = new jdbc_connector();
         Connection conn = c.getConnection();
-        try{
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT student_name, professor_name, sch_date, reason, status FROM appointments");
+        try {
+            // Use a prepared statement to safely set the parameter
+            String query = "SELECT student_name, professor_name, sch_date, reason, status FROM appointments WHERE professor_name = ?";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, this.username); // Assuming username is a field in your class
+
+            ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
-                appointments.add(new Appointment(rs.getString(1),
-                        rs.getString(2),
-                        rs.getDate(3),
-                        rs.getString(4),
-                        rs.getBoolean(5))
-                );
+                appointments.add(new Appointment(
+                        rs.getString("student_name"),
+                        rs.getString("professor_name"),
+                        rs.getDate("sch_date"),
+                        rs.getString("reason"),
+                        rs.getBoolean("status")
+                ));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
 
         return appointments;

@@ -23,16 +23,20 @@
                 <p>Schedule your appointments</p>
             </div>
         </a>
-        <div class="card">
-            <i class="fas fa-tasks icon"></i>
-            <h2>Your appointments</h2>
-            <p>View your ongoing appointments</p>
-        </div>
-        <div class="card">
-            <i class="fas fa-history icon"></i>
-            <h2>History</h2>
-            <p>See your appointment history</p>
-        </div>
+        <a href = "ViewAppointments">
+            <div class="card">
+                <i class="fas fa-tasks icon"></i>
+                <h2>Your appointments</h2>
+                <p>View your ongoing appointments</p>
+            </div>
+        </a>
+        <a href="HistoryTable">
+            <div class="card">
+                <i class="fas fa-history icon"></i>
+                <h2>History</h2>
+                <p>See your appointment history</p>
+            </div>
+        </a>
     </div>
 </div>
 <button class="floating-btn" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>

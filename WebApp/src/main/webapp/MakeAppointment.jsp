@@ -29,9 +29,9 @@
     <%
         for (Professor professor : professors) {
     %>
-    <div class="grid-item" onclick="showForm('<%= professor %>'), <% chosen_professor = professor; %>">
+    <div class="grid-item" onclick="showForm('<%= professor.getFirstName() %>', '<%= professor.getLastName() %>', '<%= professor.getUsername() %>')">
         <div class="avatar"></div>
-        <div class="professor-object"><%= professor %></div>
+        <div class="professor-name"><%= professor.getUsername() %></div>
     </div>
     <%
             }
@@ -42,12 +42,10 @@
 <div id="sliding-box" class="sliding-box">
     <form id="professor-form" method="POST">
         <h2 id="form-title"></h2>
-        <label for="dropdown">Choose a Date:</label>
+        <input type="hidden" id="professor-user" name="professor-user" value="">
         <label for="dropdown">Choose a Date:</label>
         <select id="dropdown" name="dropdown">
-            <% for (Schedule schedule : chosen_professor.getSchedule()) { %>
-            <option value="<%= schedule.getDate() %>"><%= schedule.getDate() %></option>
-            <% } %>
+            <option value="" name="date">Select a date</option>
         </select>
         <label for="textarea">Your message:</label>
         <textarea id="textarea" name="textarea" rows="4" cols="50" style="resize: both;"></textarea>
@@ -57,9 +55,38 @@
 </div>
 
 <script>
-    function showForm(professor) {
-        document.getElementById('form-title').innerText = 'Form for ' + professor;
+    // Embed the schedules in a JavaScript object
+    const professorSchedules = {
+        <% for (Professor professor : professors) { %>
+        '<%= professor.getUsername() %>': [
+            <% for (Schedule schedule : professor.getSchedule()) { %>
+            <% if (schedule.isBusy()) {%>
+            '<%= schedule.getDate() %>',
+            <% } %>
+            <% } %>
+        ],
+        <% } %>
+    };
+
+    function showForm(professor_fname, professor_lname, professor_user) {
+        document.getElementById('form-title').innerText = 'Professor: ' + professor_fname + " " + professor_lname;
         document.getElementById('sliding-box').classList.add('visible');
+        document.getElementById('professor-user').value = professor_user;
+
+        // Clear previous options
+        const dropdown = document.getElementById('dropdown');
+        dropdown.innerHTML = '<option value="">Select a date</option>';
+
+        // Get the schedules for the selected professor and populate the dropdown
+        const schedules = professorSchedules[professor_user];
+        if (schedules) {
+            schedules.forEach(date => {
+                const option = document.createElement('option');
+                option.value = date;
+                option.text = date;
+                dropdown.appendChild(option);
+            });
+        }
     }
 
     function hideForm() {
@@ -69,4 +96,3 @@
 
 </body>
 </html>
-

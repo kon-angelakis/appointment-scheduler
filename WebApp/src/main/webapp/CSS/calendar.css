@@ -90,8 +90,6 @@ h1 {
 
 .event-grid {
     display: grid;
-    grid-template-columns: repeat(2, 7px); /* 2 columns */
-    grid-template-rows: repeat(2, 7px); /* 2 rows */
     gap: 3px; /* Adjust the gap between dots */
     position: absolute;
     bottom: 5px; /* Adjust as needed */
@@ -108,8 +106,12 @@ h1 {
     background-color: hsla(114, 79%, 50%, 0.88);
 }
 
+.dot.busy{
+    background-color: hsla(31, 100%, 54%, 0.88);
+}
+
 .dot.unavailable{
-    background-color: hsla(0, 77%, 43%, 0.84);
+    background-color: hsla(0, 77%, 43%, 0.88);
 }
 
 .table-header-container {

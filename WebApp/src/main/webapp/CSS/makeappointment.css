@@ -1,0 +1,114 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: #2e2e2e;
+    color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+.title {
+    font-size: 24px;
+    margin: 20px 0;
+}
+.grid-container {
+    display: grid;
+    width: 100%;
+    height: calc(100vh - 80px);
+    padding: 20px;
+    box-sizing: border-box;
+    gap: 20px;
+}
+.grid-item {
+    background-color: #3a3a3a;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+.grid-item:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+}
+.professor-name {
+    font-size: 18px;
+    color: #e0e0e0;
+    text-align: center;
+}
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: url('../Icons/avatar.jpg') no-repeat center;
+    background-size: cover;
+    margin-bottom: 10px;
+}
+.sliding-box {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 50%;
+    height: 100%;
+    background-color: #3a3a3a;
+    color: #f5f5f5;
+    padding: 20px;
+    box-shadow: -10px 0 10px rgba(0, 0, 0, 0.1);
+    transition: right 0.8s ease-in-out;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.sliding-box.visible {
+    right: 0;
+}
+#professor-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+#professor-form label {
+    font-size: 16px;
+}
+#professor-form input {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+#professor-form button {
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #5a5a5a;
+    color: #f5f5f5;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+#professor-form button:hover {
+    background-color: #7a7a7a;
+}
+.close-btn {
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #d9534f;
+    color: #f5f5f5;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.close-btn:hover {
+    background-color: #c9302c;
+}

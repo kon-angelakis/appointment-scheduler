@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Professor extends User{
-    private List<Schedule> schedule;
-    private List<Appointment> appointments;
+    private ArrayList<Schedule> schedule;
+    private ArrayList<Appointment> appointments;
     private String department;
     private jdbc_connector c;
 
@@ -59,18 +59,36 @@ public class Professor extends User{
         return true;
     }
 
-    public List<Schedule> getSchedule() {
-        schedule = new ArrayList<>();
-        c = new jdbc_connector();
+    public ArrayList<Schedule> getSchedule() {
+        ArrayList<Schedule> schedule = new ArrayList<>();
+        jdbc_connector c = new jdbc_connector();
         Connection conn = c.getConnection();
-        try{
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT date, available FROM schedule");
-            while(rs.next()) {
-                schedule.add(new Schedule(rs.getDate(1), rs.getBoolean(2)));
+
+        try {
+            String query = "SELECT date, available FROM schedule WHERE professor_username = ?";
+            PreparedStatement stmt = conn.prepareStatement(query);
+
+            // Assuming professor is an object with a getUsername() method
+            stmt.setString(1, this.getUsername());  // Set the username parameter
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                schedule.add(new Schedule(rs.getDate("date"), rs.getBoolean("available")));
             }
+
+            rs.close();
+            stmt.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
 
         return schedule;
@@ -135,6 +153,32 @@ public class Professor extends User{
                     this.email = results.getString("email");
                     this.username = results.getString("username");
                     this.password = results.getString("password");
+                    this.department = results.getString("department");
+                    return this;
+                }
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+
+    @Override
+    public Professor Preview(String username) throws SQLException {
+        c = new jdbc_connector();
+        try (Connection conn = c.getConnection();
+             PreparedStatement statement = conn.prepareStatement("SELECT users.*, professors.department  FROM users JOIN professors ON users.username = professors.username WHERE users.username ILIKE ?")) {
+
+            statement.setString(1, username);
+
+            try (ResultSet results = statement.executeQuery()) {
+                if (results.next()) {
+                    this.firstName = results.getString("firstname");
+                    this.lastName = results.getString("lastname");
+                    this.email = results.getString("email");
+                    this.username = results.getString("username");
                     this.department = results.getString("department");
                     return this;
                 }

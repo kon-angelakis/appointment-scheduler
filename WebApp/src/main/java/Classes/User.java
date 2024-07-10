@@ -3,6 +3,7 @@ package Classes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public abstract class User {
     protected String firstName;
@@ -37,6 +38,7 @@ public abstract class User {
     }
 
     public abstract User Login(String username, String password) throws SQLException; //If user exists return him otherwise return null
+    public abstract User Preview(String username) throws SQLException; //Preview user object from database without viewing/getting the password
     public void Logout(){}
 
     // Getters
@@ -59,5 +61,6 @@ public abstract class User {
     public String getPassword() {
         return password;
     }
+
 
 }

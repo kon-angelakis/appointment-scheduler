@@ -83,5 +83,31 @@ public class Student extends User{
 
     }
 
+    @Override
+    public Student Preview(String username) throws SQLException {
+        c = new jdbc_connector();
+        try (Connection conn = c.getConnection();
+             PreparedStatement statement = conn.prepareStatement("SELECT users.*, students.year  FROM users JOIN students ON users.username = students.username WHERE users.username ILIKE ?")) {
+
+            statement.setString(1, username);
+
+            try (ResultSet results = statement.executeQuery()) {
+                if (results.next()) {
+                    this.firstName = results.getString("firstname");
+                    this.lastName = results.getString("lastname");
+                    this.email = results.getString("email");
+                    this.username = results.getString("username");
+                    this.year = results.getInt("year");
+                    return this;
+                }
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+
 
 }

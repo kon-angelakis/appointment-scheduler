@@ -16,11 +16,13 @@
 <div class="container">
     <h1>Welcome, <%= user.getFirstName() + " " + user.getLastName() %></h1>
     <div class="card-container">
-        <div class="card">
-            <i class="fas fa-calendar-alt icon"></i>
-            <h2>Make Appointment</h2>
-            <p>Schedule your appointments</p>
-        </div>
+        <a href="MakeAppointment">
+            <div class="card">
+                <i class="fas fa-calendar-alt icon"></i>
+                <h2>Make Appointment</h2>
+                <p>Schedule your appointments</p>
+            </div>
+        </a>
         <div class="card">
             <i class="fas fa-tasks icon"></i>
             <h2>Your appointments</h2>

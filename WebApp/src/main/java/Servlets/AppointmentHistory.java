@@ -10,8 +10,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
-@WebServlet(name = "ViewAppointmentsPage", value = "/ViewAppointments")
-public class ViewAppointments extends HttpServlet {
+@WebServlet(name = "AppointmentHistoryServlet", value = "/AppointmentHistory")
+public class AppointmentHistory extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         response.setContentType("text/html");
@@ -26,10 +26,7 @@ public class ViewAppointments extends HttpServlet {
             throw new ServletException("Access Denied");
         }
 
-        // Placeholder: add any necessary session or request attributes here
-        // session.setAttribute("attribute_name", attribute_value);
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher("ViewAppointmentsPage.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("AppointmentHistoryPage.jsp");
         dispatcher.forward(request, response);
     }
 

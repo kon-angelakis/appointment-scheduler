@@ -30,7 +30,7 @@
                 <p>View your ongoing appointments</p>
             </div>
         </a>
-        <a href = "HistoryTable">
+        <a href = "AppointmentHistory">
             <div class="card">
                 <i class="fas fa-history icon"></i>
                 <h2>History</h2>

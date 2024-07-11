@@ -16,7 +16,7 @@
     List<Date> unavailable = calendar.getUnavailabledates();
     Date today = calendar.getToday();
     Professor professor = (Professor) session.getAttribute("user");
-    List<Appointment> prof_appointments = professor.getAppointments();
+    List<Appointment> prof_appointments = professor.ViewAppointments();
     List<Schedule> prof_schedule = professor.getSchedule();
 
     // These 2 are used for availability dot placement in the calendar

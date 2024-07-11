@@ -19,6 +19,7 @@
     <meta charset="UTF-8">
     <title>Professors</title>
     <link rel="stylesheet" href="CSS/makeappointment.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
 <div class="title">Choose a Professor</div>
@@ -41,21 +42,25 @@
 
 <div id="sliding-box" class="sliding-box">
     <form id="professor-form" method="POST">
-        <h2 id="form-title"></h2>
+        <div class="professor-info">
+            <div class="professor-avatar" id="professor-avatar"></div>
+            <h2 id="form-title"></h2>
+        </div>
         <input type="hidden" id="professor-user" name="professor-user" value="">
         <label for="dropdown">Choose a Date:</label>
         <select id="dropdown" name="dropdown">
             <option value="" name="date">Select a date</option>
         </select>
         <label for="textarea">Your message:</label>
-        <textarea id="textarea" name="textarea" rows="4" cols="50" style="resize: both;"></textarea>
+        <textarea id="textarea" name="textarea" rows="3" cols="50" style="resize: both;"></textarea>
         <button type="submit">Submit</button>
     </form>
     <button class="close-btn" type="button" onclick="hideForm()">Close</button>
 </div>
 
+<button class="floating-btn" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
+<script src="JSScripts/ToggleViewMode.js"></script>
 <script>
-    // Embed the schedules in a JavaScript object
     const professorSchedules = {
         <% for (Professor professor : professors) { %>
         '<%= professor.getUsername() %>': [
@@ -69,9 +74,13 @@
     };
 
     function showForm(professor_fname, professor_lname, professor_user) {
-        document.getElementById('form-title').innerText = 'Professor: ' + professor_fname + " " + professor_lname;
+        document.getElementById('form-title').innerText = professor_fname + " " + professor_lname;
         document.getElementById('sliding-box').classList.add('visible');
         document.getElementById('professor-user').value = professor_user;
+
+        // Set the professor's avatar
+        const avatarUrl = `../Icons/avatar.jpg`;
+        document.getElementById('professor-avatar').style.backgroundImage = `url(../Icons/avatar.jpg)`;
 
         // Clear previous options
         const dropdown = document.getElementById('dropdown');
@@ -93,6 +102,8 @@
         document.getElementById('sliding-box').classList.remove('visible');
     }
 </script>
+
+
 
 </body>
 </html>

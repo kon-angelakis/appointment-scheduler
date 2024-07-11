@@ -15,4 +15,5 @@
     </div>
 </div>
 </body>
+<script src="JSScripts/ToggleViewMode.js"></script>
 </html>

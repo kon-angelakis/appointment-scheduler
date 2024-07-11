@@ -94,7 +94,7 @@ public class Professor extends User{
         return schedule;
     }
 
-    public List<Appointment> getAppointments() {
+    public ArrayList<Appointment> ViewAppointments() {
         appointments = new ArrayList<>();
 
         c = new jdbc_connector();
@@ -103,7 +103,7 @@ public class Professor extends User{
             // Use a prepared statement to safely set the parameter
             String query = "SELECT student_name, professor_name, sch_date, reason, status FROM appointments WHERE professor_name = ?";
             PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setString(1, this.username); // Assuming username is a field in your class
+            stmt.setString(1, this.username);
 
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {

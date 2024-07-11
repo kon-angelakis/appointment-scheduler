@@ -79,3 +79,30 @@ body.light-theme table td {
 body.light-theme table tr:hover {
     background-color: #E4E5F1;
 }
+/* Floating Button Styles */
+.floating-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #4caf50;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    padding: 10px 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease;
+}
+
+.floating-btn:hover {
+    background: #388e3c;
+}
+
+body.light-theme .floating-btn {
+    background: #64b5f6;
+}
+
+body.light-theme .floating-btn:hover {
+    background: #42a5f5;
+}
